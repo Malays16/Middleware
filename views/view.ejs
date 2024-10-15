@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Книга: <%= book.title %>
+  </title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 50px 0;
+    }
+
+    .back-btn {
+      text-decoration: none;
+      color: #00f;
+    }
+
+    .back-btn:hover {
+      text-decoration: underline;
+    }
+
+    .book-title {
+      margin: 30px 0 20px;
+    }
+
+    hr {
+      display: block;
+      margin: 10px 0;
+    }
+
+    .book-info {
+      display: flex;
+      flex-direction: column;
+      padding: 20px 10px;
+    }
+
+    .book-info>div {
+      margin-bottom: 25px;
+      font-size: 20px;
+    }
+
+    .book-info>div>span {
+      font-weight: bold;
+    }
+
+    .update-btn {
+      text-decoration: none;
+      color: #00f;
+      font-size: 16px;
+      margin-top: 20px;
+    }
+
+    .update-btn:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="wrapper">
+      <a href="/" class="back-btn">&lt; Назад</a>
+      <h1 class="book-title">
+        <%= book.title %>
+      </h1>
+      <hr>
+      <section class="book-info">
+        <div class="book-description"><span>Описание:</span>
+          <%= book.description %>
+        </div>
+        <div class="book-authors"><span>Автор:</span>
+          <%= book.authors %>
+        </div>
+        <div class="book-favorite"><span>Favorite:</span>
+          <%= book.favorite %>
+        </div>
+        <div class="book-cover"><span>Обложка:</span>
+          <%= book.fileCover %>
+        </div>
+        <div class="book-filename"><span>Название файла:</span>
+          <%= book.fileName %>
+        </div>
+        <div class="book-filebook"><span>Файл книги:</span>
+          <%= book.fileBook %>
+        </div>
+      </section>
+      <a href="/book/update/<%= book.id %>" class="update-btn">Редактировать</a>
+    </div>
+  </main>
+</body>
+
+</html

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Список книг</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      border: none;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 50px 0;
+    }
+
+    .page-title {
+      margin-bottom: 40px;
+    }
+
+    .books {
+      padding: 30px 15px;
+    }
+
+    .book-item {
+      margin-bottom: 25px;
+    }
+
+    .book-link {
+      text-decoration: none;
+    }
+
+    .book-link:hover {
+      text-decoration: underline;
+    }
+
+    .book-add-btn {
+      background-color: #f0f0f0;
+      border: 1px solid #333;
+      color: #333;
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="wrapper">
+      <h1 class="page-title">Список книг</h1>
+      <article class="books">
+        <% books.forEach(book=> { %>
+          <h2 class="book-item">
+            <a href="/books/<%= book.id %>" class="book-link">
+              <%= book.title %>
+            </a>
+          </h2>
+          <% }); %>
+      </article>
+      <a href="/book/create" class="book-add-btn">Добавить книгу</a>
+    </div>
+  </main>
+</body>
+
+</html

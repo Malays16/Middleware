@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Редактировать книгу</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      border: none;
+      outline: none;
+    }
+
+    body {
+      font-family: sans-serif;
+      font-size: 16px;
+    }
+
+    .wrapper {
+      max-width: 1200px;
+      margin: 50px auto;
+    }
+
+    .page-title {
+      margin-bottom: 30px;
+    }
+
+    form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    form>div {
+      margin-bottom: 20px;
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"] {
+      width: 400px;
+      font-size: 16px;
+      padding: 10px 15px;
+      border: 1px solid #999;
+    }
+
+    input[type="text"]:focus,
+    input[type="text"]:focus-visible {
+      border: 1px solid #333;
+    }
+
+    input[type="submit"] {
+      width: 150px;
+      height: 45px;
+      border: none;
+      font-size: 18px;
+      border: 1px solid #333;
+      color: #333;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="wrapper">
+      <h1 class="page-title">Редактировать книгу</h1>
+      <form action="/book/update/<%= book.id %>" method="post">
+        <div>
+          <label for="title">Название книги</label>
+          <input type="text" name="title" id="title" value="<%= book.title %>" />
+        </div>
+        <div>
+          <label for="description">Описание книги</label>
+          <input type="text" name="description" id="description" value="<%= book.description %>" />
+        </div>
+        <div>
+          <label for="authors">Автор книги</label>
+          <input type="text" name="authors" id="authors" value="<%= book.authors %>" />
+        </div>
+        <div>
+          <label for="fileCover">Обложка книги</label>
+          <input type="text" name="fileCover" id="fileCover" value="<%= book.fileCover %>" />
+        </div>
+        <div>
+          <label for="fileName">Файл книги</label>
+          <div class="fileName">
+            <%= book.fileName %>
+          </div>
+        </div>
+        <div>
+          <label for="fileBook">Путь к файлу книги</label>
+          <div class="filePath">
+            <%= book.fileBook %>
+          </div>
+        </div>
+        <div>
+          <label for="fileBook">Загрузить другой файл</label>
+          <input type="file" name="fileBookInput" id="fileBookInput" oninput="uploadFile()" />
+          <input type="hidden" name="fileBook" id="fileBook" value="<%= book.fileBook %>" />
+        </div>
+        <div>
+          <input type="submit" value="Сохранить" />
+        </div>
+      </form>
+    </div>
+  </main>
+  <script>
+    function uploadFile() {
+      const formData = new FormData();
+      const fileInput = document.getElementById('fileBookInput');
+      if (fileInput.files.length) {
+        formData.append('fileBookInput', fileInput.files[0]);
+        fetch('/book/upload-book', {
+          method: 'POST',
+          body: formData
+        })
+          .then(response => response.json())
+          .then(data => {
+            document.getElementById('fileBook').value = data;
+          })
+          .catch(error => console.error('Error uploading file: ', error));
+      } else {
+        console.log('No file selected');
+      }
+    }
+  </script>
+</body>
+
+</html>
