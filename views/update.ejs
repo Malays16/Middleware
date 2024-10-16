@@ -117,7 +117,7 @@
       const fileInput = document.getElementById('fileBookInput');
       if (fileInput.files.length) {
         formData.append('fileBookInput', fileInput.files[0]);
-        fetch('/book/upload-book', {
+        fetch('/api/book/upload-book', {
           method: 'POST',
           body: formData
         })
